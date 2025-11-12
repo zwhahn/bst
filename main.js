@@ -22,4 +22,7 @@ tree.insert(root, 25);
 tree.insert(root, 26);
 tree.insert(root, 27);
 tree.prettyPrint(root);
-console.log(tree.isBalanced(root))
+console.log(tree.isBalanced(root));
+console.log(root)
+tree.prettyPrint(tree.rebalance(root));
+console.log(tree.isBalanced(tree.rebalance(root)));

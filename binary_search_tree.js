@@ -284,6 +284,15 @@ export class Tree {
         return leftBalanced && rightBalanced;
     }
 
+    rebalance (root) {
+        const newArray = [];
+        this.inOrderForEach(root, (node) => newArray.push(node));
+        console.log("new Array: ", newArray)
+        
+        root = this.buildTree(newArray);
+        return root;
+    }
+
 
     // Taken from my merge sort script: https://github.com/zwhahn/recursion-practice/blob/main/merge_sort.js
     mergeSortAndRemoveDuplicates (array) {
