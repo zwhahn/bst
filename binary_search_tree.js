@@ -228,6 +228,30 @@ export class Tree {
         return 1 + Math.max(leftHeight, rightHeight);
     }
 
+    depth (node, value) {
+        if (node == null) {
+            return null;
+        }
+        
+        
+        if (node.data == value) {
+            return 0;
+        }
+        
+        const leftDepth = this.depth(node.left_child, value);
+        const rightDepth = this.depth(node.right_child, value);
+
+        if (leftDepth == null && rightDepth == null) {
+            return null
+        }
+        else if (leftDepth == null && rightDepth != null) {
+            return 1 + rightDepth;
+        }
+        else if (leftDepth != null && rightDepth == null) {
+            return 1 + leftDepth;
+        }
+    }
+
     // Taken from my merge sort script: https://github.com/zwhahn/recursion-practice/blob/main/merge_sort.js
     mergeSortAndRemoveDuplicates (array) {
         if (array.length <= 1) {

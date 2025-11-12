@@ -15,3 +15,4 @@ console.log(tree.find(root, 5));
 // tree.levelOrderForEach(root, console.log)
 // tree.postOrderForEach(root, console.log)
 console.log(tree.height(root, 3))
+console.log(tree.depth(root, 9))
