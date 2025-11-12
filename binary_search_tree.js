@@ -1,17 +1,23 @@
-class Tree {
+export class Tree {
     constructor (array, root) {
         this.array = array;
         this.root = root;
     }
 
-    buildTree (array, start, end) {
-        sortedArray = this.mergeSortAndRemoveDuplicates(array);
+    buildTree (array, start = 0, end = array.length -1) {
+        if (start === 0 && end === array.length - 1) {
+            array = this.mergeSortAndRemoveDuplicates(array);
+        }
 
-        mid = Math.floor( ( start + end ) / 2 );
-        let root = new Node([mid])
+        if (start > end) {
+            return null;
+        }
+
+        let mid = Math.floor( ( start + end ) / 2 );
+        let root = new Node(array[mid])
         
-        root.left_child = this.buildTree(sortedArray, [start], [mid - 1]);
-        root.right_child = this.buildTree(sortedArray, [mid + 1], [end]);
+        root.left_child = this.buildTree(array, start, mid - 1);
+        root.right_child = this.buildTree(array, mid + 1, end);
 
         return root;
     }
@@ -26,8 +32,8 @@ class Tree {
             let half = Math.floor(arrayLength/2);
             let leftHalf = array.slice(0, half);
             let rightHalf = array.slice(half, arrayLength);
-            let sortedLeft = mergeSort(leftHalf);
-            let sortedRight = mergeSort(rightHalf);
+            let sortedLeft = this.mergeSortAndRemoveDuplicates(leftHalf);
+            let sortedRight = this.mergeSortAndRemoveDuplicates(rightHalf);
             
             let i = 0;
             let j = 0;
@@ -63,12 +69,12 @@ class Tree {
         if (node === null) {
             return;
         }
-        if (node.right !== null) {
-            prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+        if (node.right_child !== null) {
+            this.prettyPrint(node.right_child, `${prefix}${isLeft ? '│   ' : '    '}`, false);
         }
         console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-        if (node.left !== null) {
-            prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+        if (node.left_child !== null) {
+            this.prettyPrint(node.left_child, `${prefix}${isLeft ? '    ' : '│   '}`, true);
         }
     };
 
