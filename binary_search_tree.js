@@ -213,6 +213,21 @@ export class Tree {
         callback(root.data)
     }
 
+    height (root, value = null) {
+        if (value != null) {
+            root = this.find(root, value)
+        }
+
+        if ( root == null ) {
+            return -1
+        } 
+
+        const leftHeight = this.height(root.left_child);
+        const rightHeight = this.height(root.right_child);
+
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+
     // Taken from my merge sort script: https://github.com/zwhahn/recursion-practice/blob/main/merge_sort.js
     mergeSortAndRemoveDuplicates (array) {
         if (array.length <= 1) {
