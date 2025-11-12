@@ -26,20 +26,15 @@ export class Tree {
 
     insert (root, value) {
         let current = root;
-        console.log(current.data)
         
         while (current != null) {
-            console.log("current data: ", current.data);
             if (value > current.data && current.rightChild != null) {
-                console.log("move right")
                 current = current.rightChild;
             } 
             else if (value < current.data && current.leftChild != null) {
-                console.log("move left")
                 current = current.leftChild;
             } 
             else {
-                console.log("found node")
                 break;
             } 
         }
@@ -55,27 +50,22 @@ export class Tree {
     }
 
     delete (root, value) {
-        console.log(`----- Deleting Node ${value} ------`)
         let current = root;
         let parent = null;
         let child = null;
 
         while (current != null) {
-            console.log("current data: ", current.data);
             if (value > current.data && current.rightChild != null) {
-                console.log("move right")
                 child = "right";
                 parent = current;
                 current = current.rightChild;
             } 
             else if (value < current.data && current.leftChild != null) {
-                console.log("move left")
                 child = "left";
                 parent = current;
                 current = current.leftChild;
             } 
             else {
-                console.log("found node")
                 break;
             }
         }
@@ -287,7 +277,6 @@ export class Tree {
     rebalance (root) {
         const newArray = [];
         this.inOrderForEach(root, (node) => newArray.push(node));
-        console.log("new Array: ", newArray)
         
         root = this.buildTree(newArray);
         return root;
