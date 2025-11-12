@@ -154,6 +154,22 @@ export class Tree {
         }
     }
 
+    levelOrderForEach (root, callback) {
+        let queue = [root];
+        
+        while (queue.length > 0) {
+            let current = queue.shift();
+            callback(current);
+            if (current.left_child != null) {
+                queue.push(current.left_child)
+            }
+            if (current.right_child != null) {
+                queue.push(current.right_child)
+            }
+        }
+        return
+    }
+
     // Taken from my merge sort script: https://github.com/zwhahn/recursion-practice/blob/main/merge_sort.js
     mergeSortAndRemoveDuplicates (array) {
         if (array.length <= 1) {

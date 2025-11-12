@@ -12,3 +12,4 @@ tree.prettyPrint(root);
 tree.delete(root, 8);
 tree.prettyPrint(root);
 console.log(tree.find(root, 5));
+tree.levelOrderForEach(root, console.log)
