@@ -54,6 +54,43 @@ export class Tree {
 
     }
 
+    delete (root, value) {
+        let current = root;
+        let parent = null;
+        let child = null;
+
+        while (current != null) {
+            console.log("current data: ", current.data);
+            if (value > current.data && current.right_child != null) {
+                console.log("move right")
+                child = "right";
+                parent = current;
+                current = current.right_child;
+            } 
+            else if (value < current.data && current.left_child != null) {
+                console.log("move left")
+                child = "left";
+                parent = current;
+                current = current.left_child;
+            } 
+            else {
+                console.log("found node")
+                break;
+            }
+        }
+
+        //Leaf node
+        if (current.left_child == null && current.right_child == null) {
+            if (child == "left") {
+                parent.left_child = null;
+            } 
+            else { parent.right_child = null;}
+        }
+
+        return root;
+
+    }
+
     // Taken from my merge sort script: https://github.com/zwhahn/recursion-practice/blob/main/merge_sort.js
     mergeSortAndRemoveDuplicates (array) {
         if (array.length <= 1) {

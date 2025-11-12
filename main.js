@@ -7,3 +7,5 @@ const root = tree.buildTree(array)
 tree.prettyPrint(root);
 tree.insert(root, 6);
 tree.prettyPrint(root);
+tree.delete(root, 6);
+tree.prettyPrint(root);
