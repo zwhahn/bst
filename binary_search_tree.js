@@ -135,6 +135,25 @@ export class Tree {
 
     }
 
+    find (node, value) {
+        if (node == null) {
+            return null
+        }
+
+        if (node.data == value) {
+            return node;
+        }
+
+        const leftFind = this.find(node.left_child, value);
+        if (leftFind != null) {
+            return leftFind
+        }
+        const rightFind = this.find(node.right_child, value);
+        if (rightFind != null) {
+            return rightFind
+        }
+    }
+
     // Taken from my merge sort script: https://github.com/zwhahn/recursion-practice/blob/main/merge_sort.js
     mergeSortAndRemoveDuplicates (array) {
         if (array.length <= 1) {

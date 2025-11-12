@@ -11,3 +11,4 @@ tree.delete(root, 6);
 tree.prettyPrint(root);
 tree.delete(root, 8);
 tree.prettyPrint(root);
+console.log(tree.find(root, 5));
