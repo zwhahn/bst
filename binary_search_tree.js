@@ -251,6 +251,39 @@ export class Tree {
             return 1 + leftDepth;
         }
     }
+    
+    isBalanced (node) {
+        if (node == null) {
+            return true
+        }
+
+        let leftHeight = 0;
+        if (node.leftChild != null) {
+            leftHeight = this.height(node.leftChild);
+        }
+
+        let rightHeight = 0;
+        if (node.rightChild != null) {
+            rightHeight = this.height(node.rightChild);
+        }
+
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return false
+        }
+
+        let leftBalanced = true;
+        if (node.leftChild != null) {
+            leftBalanced = this.isBalanced(node.leftChild)
+        }
+
+        let rightBalanced = true;
+        if (node.rightChild != null) {
+            rightBalanced = this.isBalanced(node.rightChild)
+        }
+        
+        return leftBalanced && rightBalanced;
+    }
+
 
     // Taken from my merge sort script: https://github.com/zwhahn/recursion-practice/blob/main/merge_sort.js
     mergeSortAndRemoveDuplicates (array) {

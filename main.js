@@ -16,3 +16,10 @@ console.log(tree.find(root, 5));
 // tree.postOrderForEach(root, console.log)
 console.log(tree.height(root, 3))
 console.log(tree.depth(root, 9))
+console.log(tree.isBalanced(root))
+tree.insert(root, 24);
+tree.insert(root, 25);
+tree.insert(root, 26);
+tree.insert(root, 27);
+tree.prettyPrint(root);
+console.log(tree.isBalanced(root))
