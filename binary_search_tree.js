@@ -155,6 +155,10 @@ export class Tree {
     }
 
     levelOrderForEach (root, callback) {
+        if (typeof callback !== 'function') {
+            throw new Error("A valid callback function must be provided to levelOrderForEach()");
+        }
+        
         let queue = [root];
         
         while (queue.length > 0) {
