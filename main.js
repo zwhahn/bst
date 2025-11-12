@@ -9,5 +9,5 @@ tree.insert(root, 6);
 tree.prettyPrint(root);
 tree.delete(root, 6);
 tree.prettyPrint(root);
-tree.delete(root, 1);
+tree.delete(root, 8);
 tree.prettyPrint(root);

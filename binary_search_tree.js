@@ -55,6 +55,7 @@ export class Tree {
     }
 
     delete (root, value) {
+        console.log(`----- Deleting Node ${value} ------`)
         let current = root;
         let parent = null;
         let child = null;
@@ -89,7 +90,10 @@ export class Tree {
 
         // Single child
         else if ((current.left_child == null && current.right_child != null)) {
-            if (child == "left") {
+            if (parent == null) {
+                root = current.right_child;
+            }
+            else if (child == "left") {
                 parent.left_child = current.right_child;
             }
             else {
@@ -97,12 +101,34 @@ export class Tree {
             }
         }
         else if ((current.left_child != null && current.right_child == null)) {
-            if (child == "left") {
+            if (parent == null) {
+                root = current.left_child;
+            }
+            else if (child == "left") {
                 parent.left_child = current.left_child;
             }
-            else {
-                parent.right_child = current.left_child;
+            else { parent.right_child = current.left_child; }
+        }
+
+        // Double child
+        else if ((current.left_child != null && current.right_child != null)) {
+            // Find inorder successor
+            let successor = current.right_child;
+            let successorParent = current
+            while (successor.left_child != null) {
+                successorParent = successor;
+                successor = successor.left_child;
             }
+            
+            // Move successor children up / delete successor node
+            successorParent.left_child = successor.right_child;
+
+            // Swap current and successor
+            current.data = successor.data;
+            if (child == "left" && parent != null) {
+                parent.left_child = successor;
+            } else if (child == "left" && parent != null) { 
+                parent.right_child = successor; }
         }
 
         return root;
