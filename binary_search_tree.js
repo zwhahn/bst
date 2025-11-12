@@ -79,12 +79,30 @@ export class Tree {
             }
         }
 
-        //Leaf node
+        // Leaf node
         if (current.left_child == null && current.right_child == null) {
             if (child == "left") {
                 parent.left_child = null;
             } 
             else { parent.right_child = null;}
+        }
+
+        // Single child
+        else if ((current.left_child == null && current.right_child != null)) {
+            if (child == "left") {
+                parent.left_child = current.right_child;
+            }
+            else {
+                parent.right_child = current.right_child;
+            }
+        }
+        else if ((current.left_child != null && current.right_child == null)) {
+            if (child == "left") {
+                parent.left_child = current.left_child;
+            }
+            else {
+                parent.right_child = current.left_child;
+            }
         }
 
         return root;
