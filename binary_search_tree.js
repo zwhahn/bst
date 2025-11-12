@@ -158,7 +158,7 @@ export class Tree {
         if (typeof callback !== 'function') {
             throw new Error("A valid callback function must be provided to levelOrderForEach()");
         }
-        
+
         let queue = [root];
         
         while (queue.length > 0) {
@@ -172,6 +172,45 @@ export class Tree {
             }
         }
         return
+    }
+
+    inOrderForEach(root, callback) {
+        if (typeof callback !== 'function') {
+            throw new Error("A valid callback function must be provided to levelOrderForEach()");
+        }
+        if (root == null) {
+            return;
+        }
+
+        this.inOrderForEach(root.left_child, callback);
+        callback(root.data)
+        this.inOrderForEach(root.right_child, callback);
+    }
+
+    preOrderForEach(root, callback) {
+        if (typeof callback !== 'function') {
+            throw new Error("A valid callback function must be provided to levelOrderForEach()");
+        }
+        if (root == null) {
+            return;
+        }
+
+        callback(root.data)
+        this.preOrderForEach(root.left_child, callback);
+        this.preOrderForEach(root.right_child, callback);
+    }
+
+    postOrderForEach(root, callback) {
+        if (typeof callback !== 'function') {
+            throw new Error("A valid callback function must be provided to levelOrderForEach()");
+        }
+        if (root == null) {
+            return;
+        }
+
+        this.postOrderForEach(root.left_child, callback);
+        this.postOrderForEach(root.right_child, callback);
+        callback(root.data)
     }
 
     // Taken from my merge sort script: https://github.com/zwhahn/recursion-practice/blob/main/merge_sort.js
