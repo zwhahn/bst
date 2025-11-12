@@ -18,8 +18,8 @@ export class Tree {
         let mid = Math.floor( ( start + end ) / 2 );
         let root = new Node(array[mid]);
 
-        root.left_child = this.buildTree(array, start, mid - 1);
-        root.right_child = this.buildTree(array, mid + 1, end);
+        root.leftChild = this.buildTree(array, start, mid - 1);
+        root.rightChild = this.buildTree(array, mid + 1, end);
 
         return root;
     }
@@ -30,13 +30,13 @@ export class Tree {
         
         while (current != null) {
             console.log("current data: ", current.data);
-            if (value > current.data && current.right_child != null) {
+            if (value > current.data && current.rightChild != null) {
                 console.log("move right")
-                current = current.right_child;
+                current = current.rightChild;
             } 
-            else if (value < current.data && current.left_child != null) {
+            else if (value < current.data && current.leftChild != null) {
                 console.log("move left")
-                current = current.left_child;
+                current = current.leftChild;
             } 
             else {
                 console.log("found node")
@@ -45,10 +45,10 @@ export class Tree {
         }
 
         if (value > current.data ) {
-            current.right_child = new Node(value);
+            current.rightChild = new Node(value);
         }
         else if (value < current.data) {
-            current.left_child = new Node(value);
+            current.leftChild = new Node(value);
         }
         return root;
 
@@ -62,17 +62,17 @@ export class Tree {
 
         while (current != null) {
             console.log("current data: ", current.data);
-            if (value > current.data && current.right_child != null) {
+            if (value > current.data && current.rightChild != null) {
                 console.log("move right")
                 child = "right";
                 parent = current;
-                current = current.right_child;
+                current = current.rightChild;
             } 
-            else if (value < current.data && current.left_child != null) {
+            else if (value < current.data && current.leftChild != null) {
                 console.log("move left")
                 child = "left";
                 parent = current;
-                current = current.left_child;
+                current = current.leftChild;
             } 
             else {
                 console.log("found node")
@@ -81,54 +81,54 @@ export class Tree {
         }
 
         // Leaf node
-        if (current.left_child == null && current.right_child == null) {
+        if (current.leftChild == null && current.rightChild == null) {
             if (child == "left") {
-                parent.left_child = null;
+                parent.leftChild = null;
             } 
-            else { parent.right_child = null;}
+            else { parent.rightChild = null;}
         }
 
         // Single child
-        else if ((current.left_child == null && current.right_child != null)) {
+        else if ((current.leftChild == null && current.rightChild != null)) {
             if (parent == null) {
-                root = current.right_child;
+                root = current.rightChild;
             }
             else if (child == "left") {
-                parent.left_child = current.right_child;
+                parent.leftChild = current.rightChild;
             }
             else {
-                parent.right_child = current.right_child;
+                parent.rightChild = current.rightChild;
             }
         }
-        else if ((current.left_child != null && current.right_child == null)) {
+        else if ((current.leftChild != null && current.rightChild == null)) {
             if (parent == null) {
-                root = current.left_child;
+                root = current.leftChild;
             }
             else if (child == "left") {
-                parent.left_child = current.left_child;
+                parent.leftChild = current.leftChild;
             }
-            else { parent.right_child = current.left_child; }
+            else { parent.rightChild = current.leftChild; }
         }
 
         // Double child
-        else if ((current.left_child != null && current.right_child != null)) {
+        else if ((current.leftChild != null && current.rightChild != null)) {
             // Find inorder successor
-            let successor = current.right_child;
+            let successor = current.rightChild;
             let successorParent = current
-            while (successor.left_child != null) {
+            while (successor.leftChild != null) {
                 successorParent = successor;
-                successor = successor.left_child;
+                successor = successor.leftChild;
             }
             
             // Move successor children up / delete successor node
-            successorParent.left_child = successor.right_child;
+            successorParent.leftChild = successor.rightChild;
 
             // Swap current and successor
             current.data = successor.data;
             if (child == "left" && parent != null) {
-                parent.left_child = successor;
+                parent.leftChild = successor;
             } else if (child == "left" && parent != null) { 
-                parent.right_child = successor; }
+                parent.rightChild = successor; }
         }
 
         return root;
@@ -144,11 +144,11 @@ export class Tree {
             return node;
         }
 
-        const leftFind = this.find(node.left_child, value);
+        const leftFind = this.find(node.leftChild, value);
         if (leftFind != null) {
             return leftFind
         }
-        const rightFind = this.find(node.right_child, value);
+        const rightFind = this.find(node.rightChild, value);
         if (rightFind != null) {
             return rightFind
         }
@@ -164,11 +164,11 @@ export class Tree {
         while (queue.length > 0) {
             let current = queue.shift();
             callback(current);
-            if (current.left_child != null) {
-                queue.push(current.left_child)
+            if (current.leftChild != null) {
+                queue.push(current.leftChild)
             }
-            if (current.right_child != null) {
-                queue.push(current.right_child)
+            if (current.rightChild != null) {
+                queue.push(current.rightChild)
             }
         }
         return
@@ -182,9 +182,9 @@ export class Tree {
             return;
         }
 
-        this.inOrderForEach(root.left_child, callback);
+        this.inOrderForEach(root.leftChild, callback);
         callback(root.data)
-        this.inOrderForEach(root.right_child, callback);
+        this.inOrderForEach(root.rightChild, callback);
     }
 
     preOrderForEach(root, callback) {
@@ -196,8 +196,8 @@ export class Tree {
         }
 
         callback(root.data)
-        this.preOrderForEach(root.left_child, callback);
-        this.preOrderForEach(root.right_child, callback);
+        this.preOrderForEach(root.leftChild, callback);
+        this.preOrderForEach(root.rightChild, callback);
     }
 
     postOrderForEach(root, callback) {
@@ -208,8 +208,8 @@ export class Tree {
             return;
         }
 
-        this.postOrderForEach(root.left_child, callback);
-        this.postOrderForEach(root.right_child, callback);
+        this.postOrderForEach(root.leftChild, callback);
+        this.postOrderForEach(root.rightChild, callback);
         callback(root.data)
     }
 
@@ -222,8 +222,8 @@ export class Tree {
             return -1
         } 
 
-        const leftHeight = this.height(root.left_child);
-        const rightHeight = this.height(root.right_child);
+        const leftHeight = this.height(root.leftChild);
+        const rightHeight = this.height(root.rightChild);
 
         return 1 + Math.max(leftHeight, rightHeight);
     }
@@ -238,8 +238,8 @@ export class Tree {
             return 0;
         }
         
-        const leftDepth = this.depth(node.left_child, value);
-        const rightDepth = this.depth(node.right_child, value);
+        const leftDepth = this.depth(node.leftChild, value);
+        const rightDepth = this.depth(node.rightChild, value);
 
         if (leftDepth == null && rightDepth == null) {
             return null
@@ -299,21 +299,21 @@ export class Tree {
         if (node === null) {
             return;
         }
-        if (node.right_child !== null) {
-            this.prettyPrint(node.right_child, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+        if (node.rightChild !== null) {
+            this.prettyPrint(node.rightChild, `${prefix}${isLeft ? '│   ' : '    '}`, false);
         }
         console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-        if (node.left_child !== null) {
-            this.prettyPrint(node.left_child, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+        if (node.leftChild !== null) {
+            this.prettyPrint(node.leftChild, `${prefix}${isLeft ? '    ' : '│   '}`, true);
         }
     };
 
 }
 
 class Node {
-    constructor (data = null, left_child = null, right_child = null) {
+    constructor (data = null, leftChild = null, rightChild = null) {
         this.data = data;
-        this.left_child = left_child;
-        this.right_child = right_child;
+        this.leftChild = leftChild;
+        this.rightChild = rightChild;
     }
 }
